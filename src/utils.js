@@ -44,6 +44,7 @@ function notify(text, time = 3000, type = "info") {
 
 async function checkVersion() {
     try {
+        notify("Verificando versão...", 3000, "info");
         const actualVersion = localStorage.getItem("actualVersion");
         const actualBugFix = localStorage.getItem("actualBugFix");
 
@@ -57,7 +58,6 @@ async function checkVersion() {
             return;
         }
 
-        // Nova versão do jogo
         if (version.game !== actualVersion) {
             notify("Uma nova versão está disponível!", 3000, "info");
 
@@ -81,6 +81,7 @@ async function checkVersion() {
             setTimeout(() => {
                 notify("Aplicando correções...", 2000, "warn");
                 localStorage.removeItem("data");
+                localStorage.removeItem("shop");
                 localStorage.setItem("actualBugFix", version.bugFix);
 
                 setTimeout(() => {

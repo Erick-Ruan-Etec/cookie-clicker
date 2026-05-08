@@ -2,11 +2,12 @@ function initClicker() {
     const clicker = document.getElementById("cookie");
     const cookiesEl = document.getElementById("cookies");
 
-    const data = JSON.parse(localStorage.getItem("data")) || {
+    window.data = JSON.parse(localStorage.getItem("data")) || {
         cookies: 0,
         cps: 0,
         bakeyname: "Padaria sem nome",
     };
+
     const bakeyNameEl = document.getElementById("bakeyName");
 
     bakeyNameEl.textContent = data.bakeyname;
@@ -49,4 +50,8 @@ function initClicker() {
         const finalData = JSON.stringify(data);
         localStorage.setItem("data", finalData);
     }
+
+    window.addEventListener("beforeunload", () => {
+        save();
+    });
 }

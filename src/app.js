@@ -43,6 +43,7 @@ btns.forEach((btn) => {
 function initPage(path) {
     if (path === "/clicker") {
         initClicker();
+        calculateCPS();
     }
 
     if (path === "/config") {

@@ -3,14 +3,8 @@ function initConfig() {
     const savenameBtn = document.getElementById("saveName");
     const deleteBtn = document.getElementById("delete");
 
-    const data = JSON.parse(localStorage.getItem("data")) || {
-        cookies: 0,
-        cps: 0,
-        bakeyname: "Padaria sem nome",
-    };
     const bakeyNameEl = document.getElementById("bakeyName");
 
-    console.log(bakeyNameInput);
     savenameBtn.addEventListener("click", () => {
         if (bakeyNameInput.value === "") {
             notify("Erro, valor não pode estar vazio", 3000, "error");
@@ -34,7 +28,7 @@ function initConfig() {
 
         if (clicks === 1) {
             deleteBtn.style.background = "orangered";
-            deleteBtn.textContent = "Clique novamente para confirmar";
+            deleteBtn.textContent = "Confirmar";
 
             setTimeout(() => {
                 clicks = 0;
@@ -44,7 +38,7 @@ function initConfig() {
             }, 3000);
         } else if (clicks === 2) {
             localStorage.removeItem("data");
-
+            localStorage.removeItem("shop");
             deleteBtn.textContent = "Dados apagados";
         }
     });
