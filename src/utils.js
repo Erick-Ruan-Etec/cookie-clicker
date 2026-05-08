@@ -49,8 +49,8 @@ async function checkVersion() {
 
         const res = await fetch(`versions.json?t=${Date.now()}`);
         const version = await res.json();
-
-        // Primeira execução
+        document.getElementById("version").innerHTML =
+            `Versão: ${version.game}`;
         if (!actualVersion || !actualBugFix) {
             localStorage.setItem("actualVersion", version.game);
             localStorage.setItem("actualBugFix", version.bugFix);
@@ -76,7 +76,7 @@ async function checkVersion() {
         }
 
         if (version.bugFix !== actualBugFix) {
-            notify("Correções de bugs disponíveis!", 3000, "info");
+            notify("Correção de bugs forçada...", 3000, "info");
 
             setTimeout(() => {
                 notify("Aplicando correções...", 2000, "warn");
