@@ -2,14 +2,25 @@ function initClicker() {
     const clicker = document.getElementById("cookie");
     const cookiesEl = document.getElementById("cookies");
 
-    window.data = JSON.parse(localStorage.getItem("data")) || {
-        cookies: 0,
-        cps: 0,
-        bakeyname: "Padaria sem nome",
-    };
+    try {
+        window.data = JSON.parse(localStorage.getItem("data")) || {
+            cookies: 0,
+            cps: 0,
+            bakeyname: "Padaria sem nome",
+        };
+    } catch {
+        window.data = {
+            cookies: 0,
+            cps: 0,
+            bakeyname: "Padaria sem nome",
+        };
+    }
 
     const bakeyNameEl = document.getElementById("bakeyName");
-
+    if (!bakeyNameEl) {
+        notify("Erro", 2000, "error");
+        return;
+    }
     bakeyNameEl.textContent = data.bakeyname;
 
     let displayCookies = 0;
@@ -21,7 +32,6 @@ function initClicker() {
 
     function addCookies(amount) {
         data.cookies += amount;
-        save();
     }
 
     setInterval(() => {
@@ -37,7 +47,20 @@ function initClicker() {
             displayCookies = data.cookies;
         }
 
-        cookiesEl.textContent = `${displayCookies.toFixed(1)} cookies`;
+        function formatNumber(num) {
+            if (num >= 1_000_000_000) {
+                return (num / 1_000_000_000).toFixed(1) + "B";
+            }
+
+            if (num >= 1_000_000) {
+                return (num / 1_000_000).toFixed(1) + "M";
+            }
+
+            if (num >= 1_000) {
+                return (num / 1_000).toFixed(1) + "K";
+            }
+        }
+        cookiesEl.textContent = `${formatNumber(displayCookies)} cookies`;
 
         animationFrame = requestAnimationFrame(animate);
     }
@@ -47,6 +70,7 @@ function initClicker() {
     }, 300);
 
     function save() {
+        notify("Dados salvos", 500, "info");
         const finalData = JSON.stringify(data);
         localStorage.setItem("data", finalData);
     }
@@ -54,4 +78,8 @@ function initClicker() {
     window.addEventListener("beforeunload", () => {
         save();
     });
+
+    setInterval(() => {
+        save();
+    }, 60000);
 }

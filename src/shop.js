@@ -1,5 +1,5 @@
 function initShop() {
-    const shop = JSON.parse(localStorage.getItem("shop")) || [
+    window.shop = JSON.parse(localStorage.getItem("shop")) || [
         {
             name: "Cursor",
             price: 15,
@@ -67,7 +67,7 @@ function initShop() {
 
     const cookiesEl = document.getElementById("cookies");
     function updateCookies() {
-        cookiesEl.innerText = `Cookies: ${data.cookies.toFixed(1)}`;
+        cookiesEl.innerText = `Cookies: ${formatNumber(data.cookies)}`;
     }
 
     setInterval(() => {

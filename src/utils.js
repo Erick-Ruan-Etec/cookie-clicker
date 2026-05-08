@@ -97,3 +97,17 @@ async function checkVersion() {
 setInterval(checkVersion, 60000);
 
 checkVersion();
+
+function formatNumber(num, n = 1) {
+    if (num >= 1_000_000_000) {
+        return (num / 1_000_000_000).toFixed(n) + "B";
+    }
+
+    if (num >= 1_000_000) {
+        return (num / 1_000_000).toFixed(n) + "M";
+    }
+
+    if (num >= 1_000) {
+        return (num / 1_000).toFixed(n) + "K";
+    }
+}

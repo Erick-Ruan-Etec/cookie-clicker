@@ -23,6 +23,11 @@
     border-radius: 10px;
 }
 
+#cookies {
+    font-family: "NumberFont", sans-serif;
+    font-size: 24px;
+}
+
 .clicker img {
     cursor: pointer;
     width: 300px;
