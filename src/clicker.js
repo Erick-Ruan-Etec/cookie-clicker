@@ -47,7 +47,7 @@ function initClicker() {
             displayCookies = data.cookies;
         }
 
-        cookiesEl.textContent = `${formatNumber(displayCookies), 2} cookies`;
+        cookiesEl.textContent = `${formatNumber(displayCookies, 2)} cookies`;
 
         animationFrame = requestAnimationFrame(animate);
     }
