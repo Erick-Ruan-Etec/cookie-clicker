@@ -80,3 +80,56 @@ body {
         transform: translateX(0%);
     }
 }
+
+#notifyContainer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    height: 60px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    z-index: 9999;
+}
+
+.notify {
+    min-width: 60px;
+    height: 60px;
+    padding: 12px;
+
+    border-radius: 10px;
+
+    color: white;
+
+    animation: fadeIn 0.2s ease;
+}
+
+.notify.info {
+    background: #3498db;
+}
+
+.notify.warn {
+    background: orange;
+}
+
+.notify.success {
+    background: #2ecc71;
+}
+
+.notify.error {
+    background: #e74c3c;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

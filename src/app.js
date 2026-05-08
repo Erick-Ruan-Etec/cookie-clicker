@@ -44,4 +44,11 @@ function initPage(path) {
     if (path === "/clicker") {
         initClicker();
     }
+
+    if (path === "/config") {
+        initConfig();
+    }
+    if (path === "/shop") {
+        initShop();
+    }
 }
