@@ -33,7 +33,7 @@ btns.forEach((btn) => {
         loadPage(page, (btno = btn));
 
         btns.forEach((btn) => {
-            btn.style.cssText = `background-color: orange; color: black;pointer-events: al; cursor: pointer`;
+            btn.style.cssText = `background-color: orange; color: black;pointer-events: all; cursor: pointer`;
             btn.disabled = false;
             btn.classList.remove("active");
         });
