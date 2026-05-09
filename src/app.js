@@ -5,6 +5,8 @@ const routes = {
     "/clicker": "pages/cookie.html",
     "/shop": "pages/shop.html",
     "/config": "pages/config.html",
+    "/updates": "pages/updates.html",
+    "/404": "pages/404.html",
 };
 
 async function loadPage(path, btno) {
@@ -12,8 +14,21 @@ async function loadPage(path, btno) {
         notify("Erro interno", 2000, "error");
         return;
     }
-    const res = (await fetch(routes[path])) || routes["/404"];
+
+    const res = await fetch(routes[path]);
+    if (!res.ok) {
+        notify("Erro interno", 2000, "error");
+
+        loadPage(
+            "/clicker",
+            (btno = document.querySelector(
+                "#menu button[data-page='/clicker']",
+            )),
+        );
+        return;
+    }
     const response = await res.text();
+
     root.innerHTML = response;
     btno.style.cssText = `
         background-color: orangered; 
@@ -47,6 +62,7 @@ btns.forEach((btn) => {
 function initPage(path) {
     if (path === "/clicker") {
         initClicker();
+        calculateCPS();
     }
 
     if (path === "/config") {
