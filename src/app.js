@@ -8,6 +8,10 @@ const routes = {
 };
 
 async function loadPage(path, btno) {
+    if (!path) {
+        notify("Erro interno", 2000, "error");
+        return;
+    }
     const res = (await fetch(routes[path])) || routes["/404"];
     const response = await res.text();
     root.innerHTML = response;
@@ -43,7 +47,6 @@ btns.forEach((btn) => {
 function initPage(path) {
     if (path === "/clicker") {
         initClicker();
-        calculateCPS();
     }
 
     if (path === "/config") {

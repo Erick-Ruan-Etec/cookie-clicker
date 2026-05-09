@@ -13,6 +13,7 @@
 }
 
 .counter {
+    max-width: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,4 +37,25 @@
 
 .clicker img:active {
     transform: scale(0.95);
+}
+
+.cookie-counter {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 20px;
+}
+
+.cookie-counter p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 100%;
+}
+
+.cookie-counter #p2 {
+    font-weight: bold;
+    font-size: larger;
 }

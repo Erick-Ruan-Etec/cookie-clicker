@@ -7,7 +7,17 @@ function initConfig() {
 
     savenameBtn.addEventListener("click", () => {
         if (bakeyNameInput.value === "") {
-            notify("Erro, valor não pode estar vazio", 3000, "error");
+            notify("Erro, o nome não pode estar vazio", 3000, "error");
+            return;
+        }
+
+        let length = bakeyNameInput.value.length;
+        if (length > 40) {
+            notify(
+                "Erro, o nome não pode ser maior que 40 caracteres",
+                3000,
+                "error",
+            );
             return;
         }
 

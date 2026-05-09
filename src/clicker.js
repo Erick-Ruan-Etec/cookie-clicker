@@ -34,12 +34,6 @@ function initClicker() {
         data.cookies += amount;
     }
 
-    setInterval(() => {
-        if (data.cps > 0) {
-            data.cookies += data.cps / 10;
-        }
-    }, 100);
-
     function animate() {
         displayCookies += (data.cookies - displayCookies) * 0.1;
 
@@ -47,7 +41,7 @@ function initClicker() {
             displayCookies = data.cookies;
         }
 
-        cookiesEl.textContent = `${formatNumber(displayCookies, 2)} cookies`;
+        cookiesEl.textContent = `${formatNumber(displayCookies, 2)}`;
 
         animationFrame = requestAnimationFrame(animate);
     }
@@ -56,14 +50,14 @@ function initClicker() {
         animate();
     }, 300);
 
-    function save() {
-        notify("Dados salvos", 500, "info");
+    function save(silent = false) {
+        if (!silent) notify("Dados salvos", 1000, "info");
         const finalData = JSON.stringify(data);
         localStorage.setItem("data", finalData);
     }
 
     window.addEventListener("beforeunload", () => {
-        save();
+        save(true);
     });
 
     setInterval(() => {

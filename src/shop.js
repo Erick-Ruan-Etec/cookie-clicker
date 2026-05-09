@@ -23,10 +23,18 @@ function initShop() {
 
         el.classList.add("shop-item");
 
+        let ty;
+        if (item.quanty == 0) {
+            ty = 1;
+        } else {
+            ty = item.quanty;
+        }
+        const price = ((item.price + 7) * ty * 1.3556).toFixed(0);
+
         el.innerHTML = `
             <h3>${item.name}</h3>
 
-            <p>Preço: ${((item.price + 7) * item.quanty * 1.35).toFixed(0)}</p>
+            <p>Preço: ${price}</p>
             <p>Quantidade: ${item.quanty}</p>
             <p>Clicks: +${item.clicks}</p>
 
@@ -46,7 +54,13 @@ function initShop() {
 
     function buyItem(index) {
         const item = shop[index];
-        const price = (item.price + 7) * item.quanty * 1.35;
+        let ty;
+        if (item.quanty == 0) {
+            ty = 1;
+        } else {
+            ty = item.quanty;
+        }
+        const price = (item.price + 7) * ty * 1.35;
 
         if (data.cookies >= price.toFixed(0)) {
             data.cookies -= price.toFixed(0);
@@ -114,6 +128,6 @@ function addCPS() {
     if (interval) clearInterval(interval);
 
     interval = setInterval(() => {
-        addCookies(cps);
-    }, 1000);
+        addCookies(cps / 10);
+    }, 100);
 }
